@@ -1,11 +1,29 @@
 import express from "express";
+import bodyParser from 'body-parser';
+
+import {serverPort} from '../etc/config.json';
+
+import * as db from './utils/DataBaseUtils.js';
+
+db.setUpConnection();
+
 
 const app = express();
 
-app.get('/', (req, res) => {
-	res.send('Hello World!')
+app.use(bodyParser.json());
+
+app.get('/notes', (req, res) => {
+	db.listNotes().then(data => res.send(data))
 });
 
-const server = app.listen(9000, () => {
-	console.log('Server is running on port 9000');
+app.post('/notes', (req, res) => {
+	db.createNote(req.body).then(data => res.send(data))
+});
+
+app.delete('/notes/:id', (req, res) => {
+	db.deleteNotes(req.params.id).then(data => res.send(data))
+});
+
+const server = app.listen(serverPort, () => {
+	console.log(`Server is running on port ${serverPort}`);
 });
