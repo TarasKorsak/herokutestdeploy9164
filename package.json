@@ -19,7 +19,7 @@
   "homepage": "https://github.com/TarasKorsak/herokutestdeploy9164#readme",
   "dependencies": {
     "axios": "^0.9.1",
-    "body-parser": "^1.12.3",
+    "body-parser": "^1.20.1",
     "classnames": "^2.2.3",
     "cors": "*",
     "events": "^1.1.0",
